@@ -6,7 +6,6 @@
     <title>Menu de Pesquisas - Marcelo</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        
         body {
             align-items: flex-start;
             padding-top: 35px;
@@ -14,7 +13,7 @@
 
         .research-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 960px;
         }
 
         .top-bar {
@@ -51,7 +50,7 @@
         /* Grade de Ícones / Cards do Menu */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px;
         }
 
@@ -68,6 +67,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            min-width: 0;
         }
 
         .icon-card:hover {
@@ -78,7 +78,7 @@
 
         /* Estilo especial para cards com miniatura do YouTube */
         .icon-card.youtube-card {
-            padding: 0 0 20px 0;
+            padding: 0 0 18px 0;
             overflow: hidden;
             border-color: #ff0055;
             box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
@@ -95,7 +95,7 @@
             aspect-ratio: 16 / 9;
             background: #000;
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             border-bottom: 1px solid rgba(255, 0, 85, 0.4);
         }
 
@@ -116,47 +116,71 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 46px;
-            height: 32px;
+            width: 44px;
+            height: 30px;
             background: rgba(255, 0, 0, 0.9);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         .yt-card-body {
-            padding: 0 16px;
+            padding: 0 14px;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 0;
         }
 
         .card-icon {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
+            font-size: 2.6rem;
+            margin-bottom: 10px;
             filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.7));
         }
 
         .card-category {
-            font-size: 0.72rem;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #00f508;
             text-shadow: 0 0 6px #0db401;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #ffffff;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
-            margin-bottom: 14px;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .card-note {
+            font-size: 0.82rem;
+            color: #b8c4e0;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            white-space: pre-line;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid #00f3ff;
+            padding: 7px 9px;
+            border-radius: 6px;
+            width: 100%;
+            text-align: left;
+            word-break: break-word;
         }
 
         .card-open-label {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #39ff14;
             font-weight: bold;
             text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
@@ -239,6 +263,73 @@
         .hidden {
             display: none !important;
         }
+
+        /* Celular: mantém sempre 3 cards por linha (3x3 conforme adiciona itens) */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 18px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .icon-card {
+                border-radius: 12px;
+                padding: 10px 6px;
+            }
+
+            .icon-card.youtube-card {
+                padding: 0 0 10px 0;
+                border-radius: 12px;
+            }
+
+            .yt-thumb-wrapper {
+                margin-bottom: 6px;
+            }
+
+            .yt-play-badge {
+                width: 24px;
+                height: 18px;
+                font-size: 0.55rem;
+                border-radius: 4px;
+            }
+
+            .yt-card-body {
+                padding: 0 5px;
+            }
+
+            .card-icon {
+                font-size: 1.4rem;
+                margin-bottom: 6px;
+            }
+
+            .card-category {
+                font-size: 0.45rem;
+                letter-spacing: 0.5px;
+                margin-bottom: 3px;
+            }
+
+            .card-title {
+                font-size: 0.65rem;
+                line-height: 1.2;
+                margin-bottom: 5px;
+            }
+
+            .card-note {
+                font-size: 0.55rem;
+                line-height: 1.25;
+                padding: 4px 5px;
+                margin-bottom: 6px;
+                border-left-width: 1.5px;
+            }
+
+            .card-open-label {
+                font-size: 0.52rem;
+                line-height: 1.15;
+            }
+        }
     </style>
 </head>
 <body>
@@ -288,19 +379,17 @@
     <script>
         // =========================================================================
         // ✍️ ADICIONE SEUS VÍDEOS DO YOUTUBE OU IDEIAS AQUI DENTRO!
-        // Basta colar o link do YouTube no campo "link" que a miniatura aparece
-        // sozinha e o clique já leva direto para o YouTube!
+        // O campo "texto" aparece logo abaixo do título antes do botão do YouTube.
         // =========================================================================
         const MINHAS_PESQUISAS = [
             {
-                
                 titulo: "XIAOMI 18 PRO MAX",
                 link: "https://www.youtube.com/watch?v=A29056hds10",
                 texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             },
             {
                 titulo: "XIAOMI 18 PRO MAX",
-                link: "https://www.youtube.com/watch?v=A29056hds10",
+                link: "https://www.youtube.com/watch?v=_KvhRIASXHw",
                 texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             },
             {
@@ -316,7 +405,6 @@
         const menuGrid = document.getElementById('menuGrid');
         const filtro = document.getElementById('filtro');
 
-        // Extrai automaticamente o ID de qualquer formato de link do YouTube
         function extrairIdYouTube(url) {
             if (!url) return null;
             const regex = /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -326,13 +414,14 @@
 
         function renderizarMenu(termo = '') {
             menuGrid.innerHTML = '';
+            const termoLower = termo.toLowerCase();
 
             const filtradas = MINHAS_PESQUISAS
                 .map((item, index) => ({ ...item, indexOriginal: index }))
                 .filter(p =>
-                    p.titulo.toLowerCase().includes(termo.toLowerCase()) ||
-                    p.categoria.toLowerCase().includes(termo.toLowerCase()) ||
-                    (p.texto && p.texto.toLowerCase().includes(termo.toLowerCase()))
+                    (p.titulo && p.titulo.toLowerCase().includes(termoLower)) ||
+                    (p.categoria && p.categoria.toLowerCase().includes(termoLower)) ||
+                    (p.texto && p.texto.toLowerCase().includes(termoLower))
                 );
 
             if (filtradas.length === 0) {
@@ -343,31 +432,34 @@
             filtradas.forEach(item => {
                 const videoId = extrairIdYouTube(item.link);
                 const card = document.createElement('div');
+                const mensagemHtml = item.texto && item.texto.trim()
+                    ? `<p class="card-note">${item.texto.trim()}</p>`
+                    : '';
 
                 if (videoId) {
-                    // Card com miniatura automática do YouTube que abre direto no site
                     const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     card.className = 'icon-card youtube-card';
                     card.onclick = () => window.open(item.link, '_blank', 'noopener,noreferrer');
                     card.innerHTML = `
                         <div class="yt-thumb-wrapper">
-                            <img src="${thumbUrl}" alt="${item.titulo}" class="yt-thumb-img" loading="lazy">
+                            <img src="${thumbUrl}" alt="${item.titulo || 'Vídeo do YouTube'}" class="yt-thumb-img" loading="lazy">
                             <div class="yt-play-badge">▶</div>
                         </div>
                         <div class="yt-card-body">
                             <div class="card-category">${item.categoria || 'YOUTUBE'}</div>
-                            <h3 class="card-title">${item.titulo}</h3>
+                            <h3 class="card-title">${item.titulo || 'Vídeo sem título'}</h3>
+                            ${mensagemHtml}
                             <span class="card-open-label yt-label">▶ Assistir no YouTube →</span>
                         </div>
                     `;
                 } else {
-                    // Card normal para anotações/ideias sem vídeo do YouTube
                     card.className = 'icon-card';
                     card.onclick = () => abrirIdeia(item.indexOriginal);
                     card.innerHTML = `
                         <div class="card-icon">${item.icone || '💡'}</div>
-                        <div class="card-category">${item.categoria}</div>
-                        <h3 class="card-title">${item.titulo}</h3>
+                        <div class="card-category">${item.categoria || 'NOTA'}</div>
+                        <h3 class="card-title">${item.titulo || 'Sem título'}</h3>
+                        ${mensagemHtml}
                         <span class="card-open-label">Abrir página →</span>
                     `;
                 }
@@ -381,10 +473,10 @@
             if (!item) return;
 
             document.getElementById('detailIcon').textContent = item.icone || '💡';
-            document.getElementById('detailCategory').textContent = item.categoria;
-            document.getElementById('detailTitle').textContent = item.titulo;
+            document.getElementById('detailCategory').textContent = item.categoria || 'NOTA';
+            document.getElementById('detailTitle').textContent = item.titulo || 'Sem título';
             document.getElementById('detailDate').textContent = item.data ? `Data: ${item.data}` : '';
-            document.getElementById('detailContent').textContent = item.texto;
+            document.getElementById('detailContent').textContent = item.texto || '';
 
             const linkEl = document.getElementById('detailLink');
             if (item.link) {
