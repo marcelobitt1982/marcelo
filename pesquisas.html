@@ -14,6 +14,20 @@
         .research-container {
             width: 100%;
             max-width: 960px;
+            animation: emergeFromBack 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes emergeFromBack {
+            0% {
+                opacity: 0;
+                transform: perspective(1100px) translateZ(-450px) scale(0.75);
+                filter: blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(1100px) translateZ(0px) scale(1);
+                filter: blur(0px);
+            }
         }
 
         .top-bar {
@@ -80,7 +94,7 @@
             box-shadow: 0 0 16px rgba(0, 243, 255, 0.5);
         }
 
-        /* Seções por Classe (quando exibe várias classes) */
+        /* Seções por Classe */
         .class-sections-wrapper {
             display: flex;
             flex-direction: column;
@@ -212,9 +226,19 @@
         }
 
         .card-icon {
-            font-size: 2.6rem;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.7));
+            font-size: 2.5rem;
+        }
+
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
         .card-category {
@@ -296,8 +320,19 @@
         }
 
         .detail-icon {
-            font-size: 3rem;
-            filter: drop-shadow(0 0 12px rgba(57, 255, 20, 0.7));
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+        }
+
+        .detail-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
         .detail-category {
@@ -394,8 +429,10 @@
             }
 
             .card-icon {
-                font-size: 1.4rem;
+                width: 34px;
+                height: 34px;
                 margin-bottom: 6px;
+                font-size: 1.4rem;
             }
 
             .card-category {
@@ -458,7 +495,7 @@
             </div>
 
             <div class="detail-header-info">
-                <div class="detail-icon" id="detailIcon">💡</div>
+                <div class="detail-icon" id="detailIcon"></div>
                 <div>
                     <div class="detail-category" id="detailCategory">CATEGORIA</div>
                     <h2 class="detail-title" id="detailTitle">Título</h2>
@@ -486,6 +523,75 @@
             "tecnologia"
         ];
 
+        const ICONES_POR_CLASSE = {
+            Windows: `
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="winGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#00f3ff"/>
+                            <stop offset="100%" stop-color="#0077ff"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M10 15.5L28.5 13V30.5H10V15.5Z" fill="url(#winGrad)" stroke="#9cf8ff" stroke-width="1.5"/>
+                    <path d="M31.5 12.6L54 9.5V30.5H31.5V12.6Z" fill="url(#winGrad)" stroke="#9cf8ff" stroke-width="1.5"/>
+                    <path d="M10 33.5H28.5V51L10 48.5V33.5Z" fill="url(#winGrad)" stroke="#9cf8ff" stroke-width="1.5"/>
+                    <path d="M31.5 33.5H54V54.5L31.5 51.4V33.5Z" fill="url(#winGrad)" stroke="#9cf8ff" stroke-width="1.5"/>
+                </svg>
+            `,
+            Linux: `
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="linuxBody" x1="16" y1="10" x2="48" y2="56" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#2c3347"/>
+                            <stop offset="100%" stop-color="#111522"/>
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="32" cy="36" rx="16.5" ry="19.5" fill="url(#linuxBody)" stroke="#ffae00" stroke-width="2.2"/>
+                    <circle cx="32" cy="21" r="10.5" fill="url(#linuxBody)" stroke="#ffae00" stroke-width="2.2"/>
+                    <ellipse cx="32" cy="39.5" rx="10.5" ry="12.5" fill="#f5f7ff"/>
+                    <circle cx="28.2" cy="19.5" r="2.3" fill="#ffffff"/>
+                    <circle cx="35.8" cy="19.5" r="2.3" fill="#ffffff"/>
+                    <circle cx="28.5" cy="19.5" r="1.1" fill="#090912"/>
+                    <circle cx="35.5" cy="19.5" r="1.1" fill="#090912"/>
+                    <path d="M27.5 24.5C29.5 27.5 34.5 27.5 36.5 24.5C34.5 23.2 29.5 23.2 27.5 24.5Z" fill="#ffae00"/>
+                    <ellipse cx="22.5" cy="54.5" rx="6.5" ry="3.2" fill="#ffae00"/>
+                    <ellipse cx="41.5" cy="54.5" rx="6.5" ry="3.2" fill="#ffae00"/>
+                </svg>
+            `,
+            receitas: `
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="panGrad" x1="10" y1="28" x2="54" y2="52" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#ff9e2c"/>
+                            <stop offset="100%" stop-color="#ff4d4d"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M22 18C22 14.5 25 13 25 9.5" stroke="#39ff14" stroke-width="2.3" stroke-linecap="round"/>
+                    <path d="M32 17C32 13 35 11.5 35 8" stroke="#00f3ff" stroke-width="2.3" stroke-linecap="round"/>
+                    <path d="M42 18C42 14.5 45 13 45 9.5" stroke="#ffae00" stroke-width="2.3" stroke-linecap="round"/>
+                    <circle cx="32" cy="24.5" r="2.5" fill="#ffd166"/>
+                    <path d="M16 33C16 26.8 23.2 25.5 32 25.5C40.8 25.5 48 26.8 48 33H16Z" fill="url(#panGrad)" stroke="#ffd166" stroke-width="1.6"/>
+                    <rect x="12" y="34" width="40" height="4.5" rx="2.2" fill="#ffd166"/>
+                    <path d="M16 38.5H48L44.5 49.5C44 51.2 42.4 52.5 40.6 52.5H23.4C21.6 52.5 20 51.2 19.5 49.5L16 38.5Z" fill="url(#panGrad)" stroke="#ff9e2c" stroke-width="1.6"/>
+                </svg>
+            `,
+            tecnologia: `
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="chipGrad" x1="16" y1="16" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#d966ff"/>
+                            <stop offset="100%" stop-color="#00f3ff"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="17" y="17" width="30" height="30" rx="6" fill="#120c24" stroke="url(#chipGrad)" stroke-width="2.5"/>
+                    <rect x="24" y="24" width="16" height="16" rx="3" fill="url(#chipGrad)" fill-opacity="0.28" stroke="#00f3ff" stroke-width="1.6"/>
+                    <circle cx="32" cy="32" r="3" fill="#39ff14"/>
+                    <path d="M23 10V17M32 10V17M41 10V17M23 47V54M32 47V54M41 47V54" stroke="#00f3ff" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M10 23H17M10 32H17M10 41H17M47 23H54M47 32H54M47 41H54" stroke="#d966ff" stroke-width="2.4" stroke-linecap="round"/>
+                </svg>
+            `
+        };
+
         const MINHAS_PESQUISAS = [
             {
                 classe: "YouTube",
@@ -507,28 +613,24 @@
             },
             {
                 classe: "Windows",
-                icone: "🪟",
                 titulo: "Atalhos e Limpeza",
                 link: "",
                 texto: `Dicas rápidas para manter o Windows leve no dia a dia.`
             },
             {
                 classe: "Linux",
-                icone: "🐧",
                 titulo: "Comandos do Terminal",
                 link: "",
                 texto: `Comandos úteis para pacotes, arquivos e Git.`
             },
             {
                 classe: "receitas",
-                icone: "🍳",
                 titulo: "Receitas Salvas",
                 link: "",
                 texto: `Ideias de pratos rápidos e anotações de preparo.`
             },
             {
                 classe: "tecnologia",
-                icone: "⚡",
                 titulo: "Novidades & Gadgets",
                 link: "",
                 texto: `Smartphones, ferramentas e testes interessantes.`
@@ -560,6 +662,16 @@
 
         function slugClasse(valor) {
             return normalizarClasse(valor).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+
+        function obterIconeHtml(item, classeNome) {
+            if (item.icone && item.icone.trim()) {
+                return item.icone.trim();
+            }
+            if (ICONES_POR_CLASSE[classeNome]) {
+                return ICONES_POR_CLASSE[classeNome];
+            }
+            return '💡';
         }
 
         function renderizarAbas() {
@@ -606,10 +718,11 @@
                     </div>
                 `;
             } else {
+                const iconeHtml = obterIconeHtml(item, classeNome);
                 card.className = `icon-card classe-${classeSlug}`;
                 card.onclick = () => abrirIdeia(item.indexOriginal);
                 card.innerHTML = `
-                    <div class="card-icon">${item.icone || '💡'}</div>
+                    <div class="card-icon">${iconeHtml}</div>
                     <div class="card-category">${classeNome}</div>
                     <h3 class="card-title">${item.titulo || 'Sem título'}</h3>
                     ${mensagemHtml}
@@ -680,8 +793,9 @@
             const item = MINHAS_PESQUISAS[index];
             if (!item) return;
 
-            document.getElementById('detailIcon').textContent = item.icone || '💡';
-            document.getElementById('detailCategory').textContent = normalizarClasse(item.classe || item.categoria);
+            const classeNome = normalizarClasse(item.classe || item.categoria);
+            document.getElementById('detailIcon').innerHTML = obterIconeHtml(item, classeNome);
+            document.getElementById('detailCategory').textContent = classeNome;
             document.getElementById('detailTitle').textContent = item.titulo || 'Sem título';
             document.getElementById('detailDate').textContent = item.data ? `Data: ${item.data}` : '';
             document.getElementById('detailContent').textContent = item.texto || '';
