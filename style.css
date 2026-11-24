@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #050508;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 243, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 234, 0.08) 0%, transparent 40%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+/* Textos Neon */
+.header h3 {
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    color: #00f3ff;
+    text-shadow: 0 0 8px #00f3ff, 0 0 18px #00f3ff;
+}
+
+.header h1 {
+    font-size: 2.6rem;
+    margin-bottom: 20px;
+    color: #22ff00;
+    text-shadow: 0 0 10px #33ff00, 0 0 25px #37ff00, 0 0 40px #73ff01;
+}
+
+/* Card Estilo Celular Neon */
+.phone-card {
+    background: #0b0b12;
+    border: 2px solid #00f3ff;
+    border-radius: 32px;
+    padding: 25px 22px 35px;
+    box-shadow: 
+        0 0 15px rgba(0, 243, 255, 0.4),
+        inset 0 0 20px rgba(0, 243, 255, 0.15);
+    transition: all 0.4s ease;
+}
+
+.phone-card.unlocked {
+    border-color: #39ff14;
+    box-shadow: 
+        0 0 25px rgba(57, 255, 20, 0.6),
+        inset 0 0 25px rgba(57, 255, 20, 0.2);
+}
+
+.speaker {
+    width: 60px;
+    height: 6px;
+    background: #1a1a2e;
+    border: 1px solid #00f3ff;
+    border-radius: 10px;
+    margin: 0 auto 25px;
+    box-shadow: 0 0 8px #00f3ff;
+}
+
+.verification h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.verification p {
+    font-size: 0.9rem;
+    color: #a0a8c0;
+    line-height: 1.4;
+}
+
+/* Campos de Senha OTP */
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0 15px;
+}
+
+.otp-input {
+    width: 56px;
+    height: 64px;
+    background: #07070c;
+    border: 2px solid #00ff48;
+    border-radius: 14px;
+    color: #00f3ff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 234, 0.35);
+    transition: 0.25s;
+}
+
+.otp-input:focus {
+    border-color: #00f3ff;
+    box-shadow: 0 0 16px #00f3ff, inset 0 0 8px rgba(0, 243, 255, 0.4);
+    transform: scale(1.06);
+}
+
+.error-msg {
+    display: none;
+    color: #ff2a55;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px #ff2a55;
+}
+
+.resend {
+    font-size: 0.85rem;
+    color: #8892b0;
+    margin-bottom: 20px;
+}
+
+.resend a {
+    color: #00f3ff;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 6px #00f3ff;
+}
+
+/* Caixa de Sucesso */
+.success {
+    display: none;
+    margin-top: 20px;
+    padding: 20px 15px;
+    border-radius: 20px;
+    background: rgba(57, 255, 20, 0.06);
+    border: 1px solid #39ff14;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.success.active {
+    display: block;
+}
+
+.check {
+    width: 46px;
+    height: 46px;
+    line-height: 46px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: #39ff14;
+    color: #050508;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 0 18px #39ff14;
+}
+
+.success h2 {
+    color: #39ff14;
+    font-size: 1.25rem;
+    text-shadow: 0 0 10px #39ff14;
+}
+
+.success p {
+    font-size: 0.85rem;
+    color: #d0ffd0;
+    margin: 6px 0 16px;
+}
+
+/* Botão Neon */
+.neon-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: transparent;
+    color: #00f3ff;
+    border: 2px solid #00f3ff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 0 12px #00f3ff, inset 0 0 8px rgba(0, 243, 255, 0.3);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.neon-btn:hover {
+    background: #00f3ff;
+    color: #050508;
+    box-shadow: 0 0 25px #00f3ff;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 0.8rem;
+    color: #6c758d;
+}
+
+footer span {
+    color: #00f3ff;
+    text-shadow: 0 0 6px #00f3ff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-6px); }
+}
