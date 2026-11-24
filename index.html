@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Restrito - Web Marcelo</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            perspective: 1100px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            will-change: transform, opacity, filter;
+        }
+
+        .container.recede-back {
+            animation: pushPageBack 0.72s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes pushPageBack {
+            0% {
+                opacity: 1;
+                transform: perspective(1100px) translateZ(0px) scale(1);
+                filter: blur(0px);
+            }
+            30% {
+                opacity: 0.95;
+                transform: perspective(1100px) translateZ(-140px) scale(0.88);
+                filter: blur(0.5px);
+            }
+            100% {
+                opacity: 0;
+                transform: perspective(1100px) translateZ(-1200px) scale(0.08);
+                filter: blur(6px);
+            }
+        }
+    </style>
 </head>
 <body>
-    <main class="container">
+    <main class="container" id="mainContainer">
 
         <header class="header">
             <h3 class="neon-text-cyan">ÁREA RESTRITA</h3>
@@ -45,7 +80,7 @@
                     <div class="check">✓</div>
                     <h2>Acesso Liberado!</h2>
                     <p>Senha 0303 confirmada com sucesso.</p>
-                    <a href="pesquisas.html" class="neon-btn">Entrar nas Pesquisas →</a>
+                    <a href="pesquisas.html" id="manualEnterLink" class="neon-btn">Entrar nas Pesquisas →</a>
                 </div>
 
             </div>
@@ -65,11 +100,19 @@
         const errorMsg = document.getElementById('errorMsg');
         const phoneCard = document.getElementById('phoneCard');
         const clearBtn = document.getElementById('clearBtn');
+        const mainContainer = document.getElementById('mainContainer');
+        const manualEnterLink = document.getElementById('manualEnterLink');
+
         const SENHA_CORRETA = "0303";
+        const PAGINA_DESTINO = "pesquisas.html"; // Troque aqui se o arquivo se chamar "pesquisas_3.html"
+        let redirecionando = false;
+
+        manualEnterLink.href = PAGINA_DESTINO;
 
         inputs.forEach((input, index) => {
             input.addEventListener('input', (e) => {
-                // Permite apenas números
+                if (redirecionando) return;
+
                 e.target.value = e.target.value.replace(/[^0-9]/g, '');
                 errorMsg.style.display = 'none';
 
@@ -80,11 +123,24 @@
             });
 
             input.addEventListener('keydown', (e) => {
+                if (redirecionando) return;
+
                 if (e.key === 'Backspace' && !e.target.value && index > 0) {
                     inputs[index - 1].focus();
                 }
             });
         });
+
+        function irParaPaginaComRecuo(url) {
+            if (redirecionando) return;
+            redirecionando = true;
+
+            mainContainer.classList.add('recede-back');
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 680);
+        }
 
         function verificarSenha() {
             const codigoDigitado = Array.from(inputs).map(i => i.value).join('');
@@ -94,6 +150,10 @@
                     phoneCard.classList.add('unlocked');
                     successBox.classList.add('active');
                     inputs.forEach(i => i.disabled = true);
+
+                    setTimeout(() => {
+                        irParaPaginaComRecuo(PAGINA_DESTINO);
+                    }, 220);
                 } else {
                     errorMsg.style.display = 'block';
                     phoneCard.classList.add('shake');
@@ -117,8 +177,14 @@
 
         clearBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            if (redirecionando) return;
             errorMsg.style.display = 'none';
             limparCampos();
+        });
+
+        manualEnterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            irParaPaginaComRecuo(PAGINA_DESTINO);
         });
     </script>
 
