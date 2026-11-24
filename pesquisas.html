@@ -26,7 +26,7 @@
         }
 
         .search-bar {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
 
         .neon-input {
@@ -45,6 +45,58 @@
         .neon-input:focus {
             border-color: #00f3ff;
             box-shadow: 0 0 16px rgba(0, 243, 255, 0.55);
+        }
+
+        /* Barra de Classes / Categorias */
+        .class-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .class-tab-btn {
+            background: #090912;
+            color: #cfd8f5;
+            border: 1.5px solid rgba(0, 243, 255, 0.45);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .class-tab-btn:hover {
+            border-color: #39ff14;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.35);
+        }
+
+        .class-tab-btn.active {
+            background: rgba(0, 243, 255, 0.14);
+            border-color: #00f3ff;
+            color: #00f3ff;
+            box-shadow: 0 0 16px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Seções por Classe (quando exibe várias classes) */
+        .class-sections-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .class-section-title {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #39ff14;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.45);
+            margin-bottom: 14px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(57, 255, 20, 0.25);
+            text-align: left;
         }
 
         /* Grade de Ícones / Cards do Menu */
@@ -74,6 +126,28 @@
             transform: translateY(-5px) scale(1.02);
             border-color: #09ff00;
             box-shadow: 0 0 25px rgba(5, 144, 37, 0.55), inset 0 0 15px rgba(255, 0, 234, 0.15);
+        }
+
+        /* Cores sutis por classe */
+        .icon-card.classe-youtube {
+            border-color: #ff0055;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+        }
+
+        .icon-card.classe-windows {
+            border-color: #00a8ff;
+        }
+
+        .icon-card.classe-linux {
+            border-color: #ffae00;
+        }
+
+        .icon-card.classe-receitas {
+            border-color: #ff6b35;
+        }
+
+        .icon-card.classe-tecnologia {
+            border-color: #b537f2;
         }
 
         /* Estilo especial para cards com miniatura do YouTube */
@@ -270,6 +344,25 @@
                 padding-top: 18px;
             }
 
+            .class-tabs {
+                gap: 6px;
+                margin-bottom: 16px;
+            }
+
+            .class-tab-btn {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+
+            .class-sections-wrapper {
+                gap: 18px;
+            }
+
+            .class-section-title {
+                font-size: 0.78rem;
+                margin-bottom: 8px;
+            }
+
             .menu-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 8px;
@@ -350,8 +443,11 @@
                 <input type="text" id="filtro" class="neon-input" placeholder="🔍 Filtrar vídeos ou ideias pelo nome...">
             </div>
 
+            <!-- Botões para separar por classe -->
+            <nav class="class-tabs" id="classTabs" aria-label="Classes de pesquisa"></nav>
+
             <!-- Os cards e miniaturas são criados automaticamente a partir da lista lá embaixo -->
-            <section class="menu-grid" id="menuGrid"></section>
+            <section class="class-sections-wrapper" id="menuGrid"></section>
         </div>
 
         <!-- TELA 2: PÁGINA INTERNA DA IDEIA SELECIONADA (Para notas sem vídeo) -->
@@ -379,24 +475,63 @@
     <script>
         // =========================================================================
         // ✍️ ADICIONE SEUS VÍDEOS DO YOUTUBE OU IDEIAS AQUI DENTRO!
-        // O campo "texto" aparece logo abaixo do título antes do botão do YouTube.
+        // Use o campo "classe" com uma das classes:
+        // "YouTube", "Windows", "Linux", "receitas", "tecnologia"
         // =========================================================================
+        const CLASSES_DISPONIVEIS = [
+            "YouTube",
+            "Windows",
+            "Linux",
+            "receitas",
+            "tecnologia"
+        ];
+
         const MINHAS_PESQUISAS = [
             {
+                classe: "YouTube",
                 titulo: "XIAOMI 18 PRO MAX",
                 link: "https://www.youtube.com/watch?v=A29056hds10",
                 texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             },
             {
-            
+                classe: "YouTube",
                 titulo: "PILAX",
                 link: "https://www.youtube.com/watch?v=VmhJhezUk8k",
                 texto: `Mutxulada · Pilax · Dj Blax · PILAX · DJ BLAX`
             },
             {
+                classe: "YouTube",
                 titulo: "Engenheiros do Hawaii",
                 link: "https://www.youtube.com/watch?v=UJf_o8P5wNg&t=576s",
                 texto: `A Coletânea Definitiva com Humberto Gessinger ⚡`
+            },
+            {
+                classe: "Windows",
+                icone: "🪟",
+                titulo: "Atalhos e Limpeza",
+                link: "",
+                texto: `Dicas rápidas para manter o Windows leve no dia a dia.`
+            },
+            {
+                classe: "Linux",
+                icone: "🐧",
+                titulo: "Comandos do Terminal",
+                link: "",
+                texto: `Comandos úteis para pacotes, arquivos e Git.`
+            },
+            {
+                classe: "receitas",
+                icone: "🍳",
+                titulo: "Receitas Salvas",
+                link: "",
+                texto: `Ideias de pratos rápidos e anotações de preparo.`
+            },
+            {
+                classe: "tecnologia",
+                icone: "⚡",
+                titulo: "Novidades & Gadgets",
+                link: "",
+                texto: `Smartphones, ferramentas e testes interessantes.`
             }
         ];
         // =========================================================================
@@ -404,7 +539,10 @@
         const menuView = document.getElementById('menuView');
         const detailView = document.getElementById('detailView');
         const menuGrid = document.getElementById('menuGrid');
+        const classTabs = document.getElementById('classTabs');
         const filtro = document.getElementById('filtro');
+
+        let classeAtiva = 'Todas';
 
         function extrairIdYouTube(url) {
             if (!url) return null;
@@ -413,59 +551,128 @@
             return match ? match[1] : null;
         }
 
+        function normalizarClasse(valor) {
+            if (!valor) return 'tecnologia';
+            const limpo = valor.trim().toLowerCase();
+            const encontrada = CLASSES_DISPONIVEIS.find(c => c.toLowerCase() === limpo);
+            return encontrada || valor.trim();
+        }
+
+        function slugClasse(valor) {
+            return normalizarClasse(valor).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        }
+
+        function renderizarAbas() {
+            const opcoes = ['Todas', ...CLASSES_DISPONIVEIS];
+            classTabs.innerHTML = '';
+
+            opcoes.forEach(nomeClasse => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `class-tab-btn ${classeAtiva === nomeClasse ? 'active' : ''}`;
+                btn.textContent = nomeClasse;
+                btn.onclick = () => {
+                    classeAtiva = nomeClasse;
+                    renderizarAbas();
+                    renderizarMenu(filtro.value);
+                };
+                classTabs.appendChild(btn);
+            });
+        }
+
+        function criarCardElement(item) {
+            const videoId = extrairIdYouTube(item.link);
+            const classeNome = normalizarClasse(item.classe || item.categoria);
+            const classeSlug = slugClasse(classeNome);
+            const card = document.createElement('div');
+            const mensagemHtml = item.texto && item.texto.trim()
+                ? `<p class="card-note">${item.texto.trim()}</p>`
+                : '';
+
+            if (videoId) {
+                const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                card.className = `icon-card youtube-card classe-${classeSlug}`;
+                card.onclick = () => window.open(item.link, '_blank', 'noopener,noreferrer');
+                card.innerHTML = `
+                    <div class="yt-thumb-wrapper">
+                        <img src="${thumbUrl}" alt="${item.titulo || 'Vídeo do YouTube'}" class="yt-thumb-img" loading="lazy">
+                        <div class="yt-play-badge">▶</div>
+                    </div>
+                    <div class="yt-card-body">
+                        <div class="card-category">${classeNome}</div>
+                        <h3 class="card-title">${item.titulo || 'Vídeo sem título'}</h3>
+                        ${mensagemHtml}
+                        <span class="card-open-label yt-label">▶ YOUTUBE →</span>
+                    </div>
+                `;
+            } else {
+                card.className = `icon-card classe-${classeSlug}`;
+                card.onclick = () => abrirIdeia(item.indexOriginal);
+                card.innerHTML = `
+                    <div class="card-icon">${item.icone || '💡'}</div>
+                    <div class="card-category">${classeNome}</div>
+                    <h3 class="card-title">${item.titulo || 'Sem título'}</h3>
+                    ${mensagemHtml}
+                    <span class="card-open-label">Abrir página →</span>
+                `;
+            }
+
+            return card;
+        }
+
         function renderizarMenu(termo = '') {
             menuGrid.innerHTML = '';
-            const termoLower = termo.toLowerCase();
+            const termoLower = termo.trim().toLowerCase();
 
             const filtradas = MINHAS_PESQUISAS
-                .map((item, index) => ({ ...item, indexOriginal: index }))
-                .filter(p =>
-                    (p.titulo && p.titulo.toLowerCase().includes(termoLower)) ||
-                    (p.categoria && p.categoria.toLowerCase().includes(termoLower)) ||
-                    (p.texto && p.texto.toLowerCase().includes(termoLower))
-                );
+                .map((item, index) => ({
+                    ...item,
+                    indexOriginal: index,
+                    classeNormalizada: normalizarClasse(item.classe || item.categoria)
+                }))
+                .filter(p => {
+                    const bateTexto =
+                        !termoLower ||
+                        (p.titulo && p.titulo.toLowerCase().includes(termoLower)) ||
+                        (p.classeNormalizada && p.classeNormalizada.toLowerCase().includes(termoLower)) ||
+                        (p.texto && p.texto.toLowerCase().includes(termoLower));
+
+                    const bateClasse =
+                        termoLower || classeAtiva === 'Todas' || p.classeNormalizada === classeAtiva;
+
+                    return bateTexto && bateClasse;
+                });
 
             if (filtradas.length === 0) {
-                menuGrid.innerHTML = '<p style="color: #8892b0; grid-column: 1 / -1;">Nenhum vídeo ou ideia encontrada.</p>';
+                menuGrid.innerHTML = '<p style="color: #8892b0;">Nenhum vídeo ou ideia encontrada nessa classe.</p>';
                 return;
             }
 
-            filtradas.forEach(item => {
-                const videoId = extrairIdYouTube(item.link);
-                const card = document.createElement('div');
-                const mensagemHtml = item.texto && item.texto.trim()
-                    ? `<p class="card-note">${item.texto.trim()}</p>`
-                    : '';
+            const classesParaExibir = termoLower
+                ? [...new Set(filtradas.map(f => f.classeNormalizada))]
+                : (classeAtiva === 'Todas' ? CLASSES_DISPONIVEIS : [classeAtiva]);
 
-                if (videoId) {
-                    const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                    card.className = 'icon-card youtube-card';
-                    card.onclick = () => window.open(item.link, '_blank', 'noopener,noreferrer');
-                    card.innerHTML = `
-                        <div class="yt-thumb-wrapper">
-                            <img src="${thumbUrl}" alt="${item.titulo || 'Vídeo do YouTube'}" class="yt-thumb-img" loading="lazy">
-                            <div class="yt-play-badge">▶</div>
-                        </div>
-                        <div class="yt-card-body">
-                            <div class="card-category">${item.categoria || 'YOUTUBE'}</div>
-                            <h3 class="card-title">${item.titulo || 'Vídeo sem título'}</h3>
-                            ${mensagemHtml}
-                            <span class="card-open-label yt-label">▶ YOUTUBE →</span>
-                        </div>
-                    `;
-                } else {
-                    card.className = 'icon-card';
-                    card.onclick = () => abrirIdeia(item.indexOriginal);
-                    card.innerHTML = `
-                        <div class="card-icon">${item.icone || '💡'}</div>
-                        <div class="card-category">${item.categoria || 'NOTA'}</div>
-                        <h3 class="card-title">${item.titulo || 'Sem título'}</h3>
-                        ${mensagemHtml}
-                        <span class="card-open-label">Abrir página →</span>
-                    `;
+            classesParaExibir.forEach(nomeClasse => {
+                const itensDaClasse = filtradas.filter(f => f.classeNormalizada === nomeClasse);
+                if (itensDaClasse.length === 0) return;
+
+                const secao = document.createElement('div');
+
+                if (classeAtiva === 'Todas' || termoLower) {
+                    const tituloSecao = document.createElement('h2');
+                    tituloSecao.className = 'class-section-title';
+                    tituloSecao.textContent = nomeClasse;
+                    secao.appendChild(tituloSecao);
                 }
 
-                menuGrid.appendChild(card);
+                const gridDaClasse = document.createElement('div');
+                gridDaClasse.className = 'menu-grid';
+                itensDaClasse.forEach(item => {
+                    gridDaClasse.appendChild(criarCardElement(item));
+                });
+
+                secao.appendChild(gridDaClasse);
+                menuGrid.appendChild(secao);
             });
         }
 
@@ -474,7 +681,7 @@
             if (!item) return;
 
             document.getElementById('detailIcon').textContent = item.icone || '💡';
-            document.getElementById('detailCategory').textContent = item.categoria || 'NOTA';
+            document.getElementById('detailCategory').textContent = normalizarClasse(item.classe || item.categoria);
             document.getElementById('detailTitle').textContent = item.titulo || 'Sem título';
             document.getElementById('detailDate').textContent = item.data ? `Data: ${item.data}` : '';
             document.getElementById('detailContent').textContent = item.texto || '';
@@ -501,6 +708,7 @@
             renderizarMenu(e.target.value);
         });
 
+        renderizarAbas();
         renderizarMenu();
     </script>
 
