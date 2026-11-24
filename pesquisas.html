@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu de Pesquisas - Neon Hub</title>
+    <title>Menu de Pesquisas - Marcelo</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        
         body {
             align-items: flex-start;
             padding-top: 35px;
@@ -25,170 +26,98 @@
             margin-bottom: 25px;
         }
 
-        /* Caixa de Nova Pesquisa (Retrátil) */
-        .research-card {
-            background: #0b0b12;
-            border: 2px solid #00f3ff;
-            border-radius: 24px;
-            padding: 25px;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.25);
-            text-align: left;
+        .search-bar {
             margin-bottom: 25px;
-            animation: fadeIn 0.35s ease;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: #00f3ff;
-            margin-bottom: 6px;
-            text-shadow: 0 0 6px rgba(0, 243, 255, 0.5);
-        }
-
-        .neon-input, .neon-textarea {
+        .neon-input {
             width: 100%;
             background: #06060a;
-            border: 1px solid #00fa64;
+            border: 1px solid #1eff00;
             border-radius: 12px;
-            padding: 12px 14px;
+            padding: 13px 16px;
             color: #fff;
             font-size: 0.95rem;
             outline: none;
-            box-shadow: 0 0 8px rgba(255, 0, 234, 0.2);
+            box-shadow: 0 0 10px rgba(255, 0, 234, 0.25);
             transition: 0.3s;
         }
 
-        .neon-input:focus, .neon-textarea:focus {
+        .neon-input:focus {
             border-color: #00f3ff;
-            box-shadow: 0 0 14px rgba(0, 243, 255, 0.5);
+            box-shadow: 0 0 16px rgba(0, 243, 255, 0.55);
         }
 
-        .neon-textarea {
-            min-height: 120px;
-            resize: vertical;
-            line-height: 1.5;
-        }
-
-        /* Barra de Ações do Menu */
-        .menu-controls {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .menu-controls .neon-input {
-            flex: 1;
-            min-width: 220px;
-        }
-
-        .btn-pink {
-            border-color: #00ff73;
-            color: #00e72e;
-            box-shadow: 0 0 12px #1ced00, inset 0 0 8px rgba(27, 167, 2, 0.3);
-        }
-
-        .btn-pink:hover {
-            background: #09ff00;
-            color: #050508;
-            box-shadow: 0 0 25px #08e400;
-        }
-
-        .btn-green {
-            border-color: #39ff14;
-            color: #39ff14;
-            box-shadow: 0 0 12px #39ff14, inset 0 0 8px rgba(57, 255, 20, 0.3);
-        }
-
-        .btn-green:hover {
-            background: #39ff14;
-            color: #050508;
-            box-shadow: 0 0 25px #39ff14;
-        }
-
-        /* Grade do Menu Principal */
+        /* Grade de Ícones / Cards do Menu */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 18px;
-            text-align: left;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
         }
 
-        .menu-item-card {
-            background: #090910;
-            border: 2px solid #00ff2a;
-            border-radius: 18px;
-            padding: 20px;
-            box-shadow: 0 0 14px rgba(5, 165, 23, 0.25);
-            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        .icon-card {
+            background: #090912;
+            border: 2px solid #00f3ff;
+            border-radius: 22px;
+            padding: 26px 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.25), inset 0 0 12px rgba(0, 243, 255, 0.08);
+            transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-
-        .menu-item-card:hover {
-            transform: translateY(-4px);
-            border-color: #00f3ff;
-            box-shadow: 0 0 22px rgba(0, 243, 255, 0.5);
-        }
-
-        .menu-item-card .tag {
-            display: inline-block;
-            font-size: 0.72rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #00f3ff;
-            margin-bottom: 8px;
-            text-shadow: 0 0 6px #00f3ff;
-        }
-
-        .menu-item-card h3 {
-            color: #ffffff;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-        }
-
-        .menu-item-card .preview {
-            color: #9aa4bf;
-            font-size: 0.85rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-
-        .menu-item-footer {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 12px;
+            justify-content: center;
+        }
+
+        .icon-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: #09ff00;
+            box-shadow: 0 0 25px rgba(5, 144, 37, 0.55), inset 0 0 15px rgba(255, 0, 234, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.7));
+        }
+
+        .card-category {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #00f508;
+            text-shadow: 0 0 6px #0db401;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+            margin-bottom: 14px;
+        }
+
+        .card-open-label {
             font-size: 0.8rem;
             color: #39ff14;
             font-weight: bold;
-            text-shadow: 0 0 6px rgba(57, 255, 20, 0.5);
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
         }
 
-        /* Tela de Visualização Individual (Página Aberta) */
+        /* Página Aberta da Ideia / Pesquisa */
         .detail-page {
             display: none;
             background: #090910;
             border: 2px solid #39ff14;
             border-radius: 24px;
             padding: 30px;
-            box-shadow: 0 0 25px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 28px rgba(57, 255, 20, 0.3);
             text-align: left;
-            animation: fadeIn 0.35s ease;
+            animation: fadeIn 0.3s ease;
         }
 
-        .detail-header {
+        .detail-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -199,72 +128,50 @@
             margin-bottom: 22px;
         }
 
+        .detail-header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 12px rgba(57, 255, 20, 0.7));
+        }
+
         .detail-category {
-            color: #01ff45;
-            font-size: 0.85rem;
+            color: #04ff64;
+            font-size: 0.82rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            text-shadow: 0 0 8px #00ff44;
-            margin-bottom: 6px;
+            text-shadow: 0 0 8px #00ff33;
         }
 
         .detail-title {
             color: #39ff14;
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             text-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
-            margin-bottom: 8px;
         }
 
-        .detail-meta {
-            color: #7d87a2;
-            font-size: 0.82rem;
-            margin-bottom: 22px;
-        }
-
-        .detail-body {
+        .detail-content {
             background: #050508;
-            border: 1px solid rgba(0, 243, 255, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.35);
             border-radius: 16px;
             padding: 22px;
-            color: #e6ecff;
+            color: #e8eeff;
             font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.75;
             white-space: pre-wrap;
-            margin-bottom: 22px;
         }
 
-        .detail-link-box {
-            margin-bottom: 24px;
-            padding: 14px;
-            border-radius: 12px;
-            background: rgba(0, 243, 255, 0.06);
-            border: 1px solid #00f3ff;
-        }
-
-        .detail-link-box a {
+        .detail-link {
+            display: inline-block;
+            margin-top: 18px;
             color: #00f3ff;
             text-decoration: none;
             font-weight: bold;
-            word-break: break-all;
             text-shadow: 0 0 8px #00f3ff;
-        }
-
-        .detail-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-danger {
-            border-color: #ff2a55;
-            color: #ff2a55;
-            box-shadow: 0 0 10px rgba(255, 42, 85, 0.4);
-        }
-
-        .btn-danger:hover {
-            background: #ff2a55;
-            color: #fff;
-            box-shadow: 0 0 22px #ff2a55;
         }
 
         .hidden {
@@ -276,243 +183,149 @@
 
     <main class="container research-container">
 
-        <!-- TELA 1: MENU PRINCIPAL -->
+        <!-- TELA 1: MENU DE ÍCONES -->
         <div id="menuView">
             <div class="top-bar">
                 <header class="header" style="text-align: left;">
-                    <h3>CENTRAL DE ARQUIVOS</h3>
-                    <h1 style="margin-bottom: 0;">MENU DE PESQUISAS</h1>
+                    <h3>ARQUIVO PESSOAL</h3>
+                    <h1 style="margin-bottom: 0;">MINHAS IDEIAS</h1>
                 </header>
-                <a href="index.html" class="neon-btn">🔒 Sair (Senha)</a>
+                <a href="index.html" class="neon-btn">🔒 Sair</a>
             </div>
 
-            <!-- Barra de Busca e Botão Nova Pesquisa -->
-            <div class="menu-controls">
-                <input type="text" id="filtro" class="neon-input" placeholder="🔍 Procurar no menu de pesquisas...">
-                <button type="button" id="toggleFormBtn" class="neon-btn btn-pink">+ Nova Pesquisa</button>
+            <div class="search-bar">
+                <input type="text" id="filtro" class="neon-input" placeholder="🔍 Filtrar ideias pelo nome...">
             </div>
 
-            <!-- Formulário para Guardar Nova Pesquisa -->
-            <section class="research-card hidden" id="formSection">
-                <h2 style="color: #00f3ff; margin-bottom: 16px; text-shadow: 0 0 8px #00f3ff;">Guardar Nova Página de Pesquisa</h2>
-                <form id="researchForm">
-                    <input type="hidden" id="editId">
-                    <div class="form-group">
-                        <label for="categoria">Categoria / Pasta</label>
-                        <input type="text" id="categoria" class="neon-input" placeholder="Ex: Programação, Jogos, Receitas, Eletrônica..." value="Geral">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="titulo">Título da Página</label>
-                        <input type="text" id="titulo" class="neon-input" placeholder="Ex: Guia de comandos Linux, Projeto Rádio..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="link">Link / Referência (opcional)</label>
-                        <input type="url" id="link" class="neon-input" placeholder="https://...">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="conteudo">Conteúdo Completo da Pesquisa</label>
-                        <textarea id="conteudo" class="neon-textarea" placeholder="Escreva todo o texto, anotações ou códigos que aparecerão quando você abrir esta página..." required></textarea>
-                    </div>
-
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button type="submit" class="neon-btn btn-green">💾 Salvar no Menu</button>
-                        <button type="button" id="cancelFormBtn" class="neon-btn btn-danger">Cancelar</button>
-                    </div>
-                </form>
-            </section>
-
-            <!-- Grade de Cards do Menu -->
+            <!-- Os ícones são criados automaticamente a partir da lista lá embaixo no código -->
             <section class="menu-grid" id="menuGrid"></section>
         </div>
 
-        <!-- TELA 2: PÁGINA INDIVIDUAL ABERTA -->
+        <!-- TELA 2: PÁGINA INTERNA DA IDEIA SELECIONADA -->
         <section id="detailView" class="detail-page">
-            <div class="detail-header">
+            <div class="detail-top">
                 <button type="button" id="backToMenuBtn" class="neon-btn">← Voltar ao Menu</button>
-                <div class="detail-actions">
-                    <button type="button" id="editCurrentBtn" class="neon-btn btn-pink">✏️ Editar</button>
-                    <button type="button" id="deleteCurrentBtn" class="neon-btn btn-danger">🗑️ Excluir</button>
+                <span id="detailDate" style="color: #7d87a2; font-size: 0.85rem;"></span>
+            </div>
+
+            <div class="detail-header-info">
+                <div class="detail-icon" id="detailIcon">💡</div>
+                <div>
+                    <div class="detail-category" id="detailCategory">CATEGORIA</div>
+                    <h2 class="detail-title" id="detailTitle">Título</h2>
                 </div>
             </div>
 
-            <div class="detail-category" id="detailCategory">CATEGORIA</div>
-            <h2 class="detail-title" id="detailTitle">Título da Pesquisa</h2>
-            <div class="detail-meta" id="detailDate">Salvo em: --/--/----</div>
+            <div class="detail-content" id="detailContent"></div>
 
-            <div class="detail-link-box hidden" id="detailLinkBox">
-                <span style="color: #a0a8c0; font-size: 0.85rem; display: block; margin-bottom: 4px;">Link relacionado:</span>
-                <a href="#" target="_blank" id="detailLink"></a>
-            </div>
-
-            <div class="detail-body" id="detailContent"></div>
+            <a href="#" target="_blank" id="detailLink" class="detail-link hidden">🔗 Abrir link relacionado →</a>
         </section>
 
     </main>
 
     <script>
+        // =========================================================================
+        // ✍️ ESCREVA SUAS IDEIAS E PESQUISAS AQUI DENTRO!
+        // Toda vez que quiser adicionar uma nova ideia, copie um bloco { ... },
+        // cole no topo da lista e preencha. Um ícone novo aparecerá no menu!
+        // =========================================================================
+        const MINHAS_PESQUISAS = [
+            {
+                icone: "",
+                categoria: "YOUTUBE",
+                titulo: "XIAOMI 18 PRO MAX",
+                data: "24/11/2026",
+                link: "https://www.youtube.com/watch?v=A29056hds10",
+                texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester. Et pour l'occasion, direction Paris pendant 3 jours, entre voyage, lancement Xiaomi, photos, moments du quotidien et découverte de ce smartphone dans des situations bien réelles.
+Son écran arrière, ses capacités photo, son design et tout ce qu'il m'accompagne à faire au quotidien… je vous emmène avec moi pour découvrir cette expérience.
+Et vous, que pensez-vous de ce Xiaomi 18 Pro Max et de son écran arrière ? Dites-moi votre avis en commentaire ! Et si la vidéo vous plaît, pensez à liker et à vous abonner pour ne rien manquer des prochaines vidéos. 👋
+Vidéo en collaboration avec Xiaomi`
+            },
+            {
+                icone: "📻",
+                categoria: "Rádio DJ Marcelo",
+                titulo: "Playlists e Vinhetas",
+                data: "24/11/2026",
+                link: "https://radiodjmarcelo.pages.dev",
+                texto: `Anotações para a rádio online:
+- Colocar mais músicas anos 80 e 90
+- Ajustar o player no celular`
+            },
+            {
+                icone: "🐧",
+                categoria: "BigLinux & VS Code",
+                titulo: "Comandos Úteis do Terminal",
+                data: "24/11/2026",
+                link: "",
+                texto: `Comandos que uso no dia a dia:
+- git add .
+- git commit -m "nova ideia"
+- git push`
+            }
+        ];
+        // =========================================================================
+
         const menuView = document.getElementById('menuView');
         const detailView = document.getElementById('detailView');
         const menuGrid = document.getElementById('menuGrid');
-        const formSection = document.getElementById('formSection');
-        const toggleFormBtn = document.getElementById('toggleFormBtn');
-        const cancelFormBtn = document.getElementById('cancelFormBtn');
-        const researchForm = document.getElementById('researchForm');
         const filtro = document.getElementById('filtro');
 
-        let pesquisas = JSON.parse(localStorage.getItem('minhas_pesquisas_neon')) || [];
-        let pesquisaAtualId = null;
-
-        function salvarNoNavegador() {
-            localStorage.setItem('minhas_pesquisas_neon', JSON.stringify(pesquisas));
-        }
-
-        // Mostrar/Esconder formulário
-        toggleFormBtn.addEventListener('click', () => {
-            document.getElementById('editId').value = '';
-            researchForm.reset();
-            document.getElementById('categoria').value = 'Geral';
-            formSection.classList.toggle('hidden');
-        });
-
-        cancelFormBtn.addEventListener('click', () => {
-            formSection.classList.add('hidden');
-            researchForm.reset();
-        });
-
-        // Renderizar o Menu Principal
         function renderizarMenu(termo = '') {
             menuGrid.innerHTML = '';
-            const filtradas = pesquisas.filter(p =>
-                p.titulo.toLowerCase().includes(termo.toLowerCase()) ||
-                (p.categoria && p.categoria.toLowerCase().includes(termo.toLowerCase())) ||
-                p.conteudo.toLowerCase().includes(termo.toLowerCase())
-            );
+
+            const filtradas = MINHAS_PESQUISAS
+                .map((item, index) => ({ ...item, indexOriginal: index }))
+                .filter(p =>
+                    p.titulo.toLowerCase().includes(termo.toLowerCase()) ||
+                    p.categoria.toLowerCase().includes(termo.toLowerCase()) ||
+                    p.texto.toLowerCase().includes(termo.toLowerCase())
+                );
 
             if (filtradas.length === 0) {
-                menuGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; border: 1px dashed #00f3ff; border-radius: 18px; color: #8892b0;">
-                        Nenhuma pesquisa guardada ainda.<br><br>
-                        Clique em <strong style="color: #ff00ea;">"+ Nova Pesquisa"</strong> acima para criar sua primeira página!
-                    </div>
-                `;
+                menuGrid.innerHTML = '<p style="color: #8892b0; grid-column: 1 / -1;">Nenhuma ideia encontrada com esse nome.</p>';
                 return;
             }
 
             filtradas.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'menu-item-card';
-                card.onclick = () => abrirPaginaPesquisa(item.id);
+                card.className = 'icon-card';
+                card.onclick = () => abrirIdeia(item.indexOriginal);
                 card.innerHTML = `
-                    <div>
-                        <span class="tag">📁 ${item.categoria || 'Geral'}</span>
-                        <h3>${item.titulo}</h3>
-                        <p class="preview">${item.conteudo}</p>
-                    </div>
-                    <div class="menu-item-footer">
-                        <span>${item.data.split(' ')[0]}</span>
-                        <span>Abrir Página →</span>
-                    </div>
+                    <div class="card-icon">${item.icone || '💡'}</div>
+                    <div class="card-category">${item.categoria}</div>
+                    <h3 class="card-title">${item.titulo}</h3>
+                    <span class="card-open-label">Abrir página →</span>
                 `;
                 menuGrid.appendChild(card);
             });
         }
 
-        // Abrir a página diferente com o conteúdo da pesquisa
-        function abrirPaginaPesquisa(id) {
-            const item = pesquisas.find(p => p.id === id);
+        function abrirIdeia(index) {
+            const item = MINHAS_PESQUISAS[index];
             if (!item) return;
 
-            pesquisaAtualId = id;
-            document.getElementById('detailCategory').textContent = '📁 ' + (item.categoria || 'Geral');
+            document.getElementById('detailIcon').textContent = item.icone || '💡';
+            document.getElementById('detailCategory').textContent = item.categoria;
             document.getElementById('detailTitle').textContent = item.titulo;
-            document.getElementById('detailDate').textContent = 'Guardado em: ' + item.data;
-            document.getElementById('detailContent').textContent = item.conteudo;
+            document.getElementById('detailDate').textContent = item.data ? `Data: ${item.data}` : '';
+            document.getElementById('detailContent').textContent = item.texto;
 
-            const linkBox = document.getElementById('detailLinkBox');
             const linkEl = document.getElementById('detailLink');
             if (item.link) {
                 linkEl.href = item.link;
-                linkEl.textContent = item.link;
-                linkBox.classList.remove('hidden');
+                linkEl.classList.remove('hidden');
             } else {
-                linkBox.classList.add('hidden');
+                linkEl.classList.add('hidden');
             }
 
-            // Troca de tela (Menu -> Página da Pesquisa)
             menuView.classList.add('hidden');
             detailView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Voltar para o Menu Principal
         document.getElementById('backToMenuBtn').addEventListener('click', () => {
-            pesquisaAtualId = null;
             detailView.style.display = 'none';
             menuView.classList.remove('hidden');
-            renderizarMenu(filtro.value);
-        });
-
-        // Salvar ou Editar Pesquisa
-        researchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const editId = document.getElementById('editId').value;
-            const categoria = document.getElementById('categoria').value.trim() || 'Geral';
-            const titulo = document.getElementById('titulo').value.trim();
-            const link = document.getElementById('link').value.trim();
-            const conteudo = document.getElementById('conteudo').value.trim();
-            const dataAgora = new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-            if (editId) {
-                const index = pesquisas.findIndex(p => p.id === Number(editId));
-                if (index !== -1) {
-                    pesquisas[index] = { ...pesquisas[index], categoria, titulo, link, conteudo, data: dataAgora + ' (editado)' };
-                }
-            } else {
-                pesquisas.unshift({
-                    id: Date.now(),
-                    categoria,
-                    titulo,
-                    link,
-                    conteudo,
-                    data: dataAgora
-                });
-            }
-
-            salvarNoNavegador();
-            researchForm.reset();
-            formSection.classList.add('hidden');
-            renderizarMenu(filtro.value);
-        });
-
-        // Botão Editar dentro da página aberta
-        document.getElementById('editCurrentBtn').addEventListener('click', () => {
-            const item = pesquisas.find(p => p.id === pesquisaAtualId);
-            if (!item) return;
-
-            detailView.style.display = 'none';
-            menuView.classList.remove('hidden');
-            formSection.classList.remove('hidden');
-
-            document.getElementById('editId').value = item.id;
-            document.getElementById('categoria').value = item.categoria || 'Geral';
-            document.getElementById('titulo').value = item.titulo;
-            document.getElementById('link').value = item.link || '';
-            document.getElementById('conteudo').value = item.conteudo;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Botão Excluir dentro da página aberta
-        document.getElementById('deleteCurrentBtn').addEventListener('click', () => {
-            if (confirm('Tem certeza que deseja apagar esta página de pesquisa?')) {
-                pesquisas = pesquisas.filter(p => p.id !== pesquisaAtualId);
-                salvarNoNavegador();
-                detailView.style.display = 'none';
-                menuView.classList.remove('hidden');
-                renderizarMenu(filtro.value);
-            }
         });
 
         filtro.addEventListener('input', (e) => {
