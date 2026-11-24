@@ -51,7 +51,7 @@
         /* Grade de Ícones / Cards do Menu */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
             gap: 20px;
         }
 
@@ -59,7 +59,7 @@
             background: #090912;
             border: 2px solid #00f3ff;
             border-radius: 22px;
-            padding: 26px 20px;
+            padding: 24px 18px;
             text-align: center;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 243, 255, 0.25), inset 0 0 12px rgba(0, 243, 255, 0.08);
@@ -67,13 +67,70 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
         }
 
         .icon-card:hover {
             transform: translateY(-5px) scale(1.02);
             border-color: #09ff00;
             box-shadow: 0 0 25px rgba(5, 144, 37, 0.55), inset 0 0 15px rgba(255, 0, 234, 0.15);
+        }
+
+        /* Estilo especial para cards com miniatura do YouTube */
+        .icon-card.youtube-card {
+            padding: 0 0 20px 0;
+            overflow: hidden;
+            border-color: #ff0055;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+        }
+
+        .icon-card.youtube-card:hover {
+            border-color: #39ff14;
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.55);
+        }
+
+        .yt-thumb-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 0, 85, 0.4);
+        }
+
+        .yt-thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-card.youtube-card:hover .yt-thumb-img {
+            transform: scale(1.06);
+        }
+
+        .yt-play-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 46px;
+            height: 32px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .yt-card-body {
+            padding: 0 16px;
+            width: 100%;
         }
 
         .card-icon {
@@ -92,7 +149,7 @@
         }
 
         .card-title {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #ffffff;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
             margin-bottom: 14px;
@@ -103,6 +160,11 @@
             color: #39ff14;
             font-weight: bold;
             text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+        }
+
+        .yt-label {
+            color: #ff2a70;
+            text-shadow: 0 0 8px rgba(255, 42, 112, 0.6);
         }
 
         /* Página Aberta da Ideia / Pesquisa */
@@ -183,7 +245,7 @@
 
     <main class="container research-container">
 
-        <!-- TELA 1: MENU DE ÍCONES -->
+        <!-- TELA 1: MENU DE ÍCONES E VÍDEOS -->
         <div id="menuView">
             <div class="top-bar">
                 <header class="header" style="text-align: left;">
@@ -194,14 +256,14 @@
             </div>
 
             <div class="search-bar">
-                <input type="text" id="filtro" class="neon-input" placeholder="🔍 Filtrar ideias pelo nome...">
+                <input type="text" id="filtro" class="neon-input" placeholder="🔍 Filtrar vídeos ou ideias pelo nome...">
             </div>
 
-            <!-- Os ícones são criados automaticamente a partir da lista lá embaixo no código -->
+            <!-- Os cards e miniaturas são criados automaticamente a partir da lista lá embaixo -->
             <section class="menu-grid" id="menuGrid"></section>
         </div>
 
-        <!-- TELA 2: PÁGINA INTERNA DA IDEIA SELECIONADA -->
+        <!-- TELA 2: PÁGINA INTERNA DA IDEIA SELECIONADA (Para notas sem vídeo) -->
         <section id="detailView" class="detail-page">
             <div class="detail-top">
                 <button type="button" id="backToMenuBtn" class="neon-btn">← Voltar ao Menu</button>
@@ -225,42 +287,26 @@
 
     <script>
         // =========================================================================
-        // ✍️ ESCREVA SUAS IDEIAS E PESQUISAS AQUI DENTRO!
-        // Toda vez que quiser adicionar uma nova ideia, copie um bloco { ... },
-        // cole no topo da lista e preencha. Um ícone novo aparecerá no menu!
+        // ✍️ ADICIONE SEUS VÍDEOS DO YOUTUBE OU IDEIAS AQUI DENTRO!
+        // Basta colar o link do YouTube no campo "link" que a miniatura aparece
+        // sozinha e o clique já leva direto para o YouTube!
         // =========================================================================
         const MINHAS_PESQUISAS = [
             {
-                icone: "",
-                categoria: "YOUTUBE",
+                
                 titulo: "XIAOMI 18 PRO MAX",
-                data: "24/11/2026",
                 link: "https://www.youtube.com/watch?v=A29056hds10",
-                texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester. Et pour l'occasion, direction Paris pendant 3 jours, entre voyage, lancement Xiaomi, photos, moments du quotidien et découverte de ce smartphone dans des situations bien réelles.
-Son écran arrière, ses capacités photo, son design et tout ce qu'il m'accompagne à faire au quotidien… je vous emmène avec moi pour découvrir cette expérience.
-Et vous, que pensez-vous de ce Xiaomi 18 Pro Max et de son écran arrière ? Dites-moi votre avis en commentaire ! Et si la vidéo vous plaît, pensez à liker et à vous abonner pour ne rien manquer des prochaines vidéos. 👋
-Vidéo en collaboration avec Xiaomi`
+                texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             },
             {
-                icone: "📻",
-                categoria: "Rádio DJ Marcelo",
-                titulo: "Playlists e Vinhetas",
-                data: "24/11/2026",
-                link: "https://radiodjmarcelo.pages.dev",
-                texto: `Anotações para a rádio online:
-- Colocar mais músicas anos 80 e 90
-- Ajustar o player no celular`
+                titulo: "XIAOMI 18 PRO MAX",
+                link: "https://www.youtube.com/watch?v=A29056hds10",
+                texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             },
             {
-                icone: "🐧",
-                categoria: "BigLinux & VS Code",
-                titulo: "Comandos Úteis do Terminal",
-                data: "24/11/2026",
-                link: "",
-                texto: `Comandos que uso no dia a dia:
-- git add .
-- git commit -m "nova ideia"
-- git push`
+                titulo: "XIAOMI 18 PRO MAX",
+                link: "https://www.youtube.com/watch?v=A29056hds10",
+                texto: `J'ai voulu vivre avec le Xiaomi 18 Pro Max plutôt que simplement le tester.`
             }
         ];
         // =========================================================================
@@ -270,6 +316,14 @@ Vidéo en collaboration avec Xiaomi`
         const menuGrid = document.getElementById('menuGrid');
         const filtro = document.getElementById('filtro');
 
+        // Extrai automaticamente o ID de qualquer formato de link do YouTube
+        function extrairIdYouTube(url) {
+            if (!url) return null;
+            const regex = /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
         function renderizarMenu(termo = '') {
             menuGrid.innerHTML = '';
 
@@ -278,24 +332,46 @@ Vidéo en collaboration avec Xiaomi`
                 .filter(p =>
                     p.titulo.toLowerCase().includes(termo.toLowerCase()) ||
                     p.categoria.toLowerCase().includes(termo.toLowerCase()) ||
-                    p.texto.toLowerCase().includes(termo.toLowerCase())
+                    (p.texto && p.texto.toLowerCase().includes(termo.toLowerCase()))
                 );
 
             if (filtradas.length === 0) {
-                menuGrid.innerHTML = '<p style="color: #8892b0; grid-column: 1 / -1;">Nenhuma ideia encontrada com esse nome.</p>';
+                menuGrid.innerHTML = '<p style="color: #8892b0; grid-column: 1 / -1;">Nenhum vídeo ou ideia encontrada.</p>';
                 return;
             }
 
             filtradas.forEach(item => {
+                const videoId = extrairIdYouTube(item.link);
                 const card = document.createElement('div');
-                card.className = 'icon-card';
-                card.onclick = () => abrirIdeia(item.indexOriginal);
-                card.innerHTML = `
-                    <div class="card-icon">${item.icone || '💡'}</div>
-                    <div class="card-category">${item.categoria}</div>
-                    <h3 class="card-title">${item.titulo}</h3>
-                    <span class="card-open-label">Abrir página →</span>
-                `;
+
+                if (videoId) {
+                    // Card com miniatura automática do YouTube que abre direto no site
+                    const thumbUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    card.className = 'icon-card youtube-card';
+                    card.onclick = () => window.open(item.link, '_blank', 'noopener,noreferrer');
+                    card.innerHTML = `
+                        <div class="yt-thumb-wrapper">
+                            <img src="${thumbUrl}" alt="${item.titulo}" class="yt-thumb-img" loading="lazy">
+                            <div class="yt-play-badge">▶</div>
+                        </div>
+                        <div class="yt-card-body">
+                            <div class="card-category">${item.categoria || 'YOUTUBE'}</div>
+                            <h3 class="card-title">${item.titulo}</h3>
+                            <span class="card-open-label yt-label">▶ Assistir no YouTube →</span>
+                        </div>
+                    `;
+                } else {
+                    // Card normal para anotações/ideias sem vídeo do YouTube
+                    card.className = 'icon-card';
+                    card.onclick = () => abrirIdeia(item.indexOriginal);
+                    card.innerHTML = `
+                        <div class="card-icon">${item.icone || '💡'}</div>
+                        <div class="card-category">${item.categoria}</div>
+                        <h3 class="card-title">${item.titulo}</h3>
+                        <span class="card-open-label">Abrir página →</span>
+                    `;
+                }
+
                 menuGrid.appendChild(card);
             });
         }
